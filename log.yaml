@@ -1,0 +1,35 @@
+version: 1
+formatters:  # 定义格式器
+  default:   # 格式器名
+    format: '%(asctime)s - %(name)s - %(levelname)s -%(threadName)s%(thread)d - %(message)s'  # 日志格式：时间 - 日志器名 - 日志等级 - 线程名 线程ID - 日志内容
+    datefmt: '%Y-%m-%d %H:%M:%S'   # 时间格式
+    use_colors: true   # 使用颜色
+handlers:     # 定义处理器
+  console:    # 处理器名
+    class: logging.StreamHandler  # 使用的handler
+    level: INFO    # 日志等级
+    formatter: default  # 使用的formatter名字
+    stream: ext://sys.stdout  # 输出到控制台
+  file:
+    class: logging.FileHandler
+    level: INFO
+    formatter: default
+    filename: app.log   # 输出到app.log
+loggers:         # 定义日志器
+  poetry_demo:   # 日志器名称
+    level: INFO  # 日志等级
+    handlers:    # 使用的handler
+      - file
+      - console
+    propagate: false   # 是否传播到父logger再处理
+  poetry_demo.module1:  # 是poetry_demo的子logger
+    level: INFO
+    handlers:
+      - console
+      - file
+    propagate: false   # 是否传播到父logger再处理
+root:            # 根日志器，所有没有归属的日志都会由root来处理
+  level: INFO
+  handlers:
+    - console
+    - file
