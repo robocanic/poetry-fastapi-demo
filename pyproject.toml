@@ -1,4 +1,4 @@
-[tool.poetry] #项目信息
+[tool.poetry] # 项目信息
 name = "poetry-fastapi-demo"
 version = "0.1.0"
 description = "A web project template using poetry and fastapi."
@@ -6,9 +6,15 @@ authors = ["robocanic <robocanic@example.com>"]
 license = "Apache 2.0"
 readme = "README.md"
 
-[tool.poetry.dependencies]  #主要依赖
+[tool.poetry.dependencies]  # 主要依赖
 python = "~3.10"
+fastapi = "^0.115.0"
+sqlalchemy = "^2.0.36"
+pyyaml = "^6.0.2"
+uvicorn = "0.32.0"
 
+[tool.poetry.group.dev.dependencies]  # 开发依赖
+pytest = "^8.3.3"
 
 [build-system]  # 构建工具
 requires = ["poetry-core"]

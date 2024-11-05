@@ -1,2 +1,13 @@
 2024-10-06 11:33:15 - module1.test - INFO -MainThread38320 - this is a log from poetry_demo.module1.test
 2024-10-06 11:44:18 - module1.test - INFO -MainThread38564 - this is a log from poetry_demo.module1.test
+2024-11-05 16:30:57 - uvicorn.error - INFO -MainThread25948 - Started server process [7200]
+2024-11-05 16:30:57 - uvicorn.error - INFO -MainThread25948 - Waiting for application startup.
+2024-11-05 16:30:57 - uvicorn.error - INFO -MainThread25948 - Application startup complete.
+2024-11-05 16:30:57 - uvicorn.error - INFO -MainThread25948 - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+2024-11-05 16:40:38 - uvicorn.access - INFO -MainThread25948 - 127.0.0.1:14281 - "GET /api/v1/user HTTP/1.1" 200
+2024-11-05 16:42:31 - poetry_fastapi_demo.routers.user - INFO -AnyIO worker thread19148 - Creating user: id=6 name='cayon' email='robocanic@gmail.com' password='xclkjva' role='user'
+2024-11-05 16:42:31 - uvicorn.access - INFO -MainThread25948 - 127.0.0.1:14647 - "POST /api/v1/user HTTP/1.1" 200
+2024-11-05 17:27:12 - uvicorn.error - INFO -MainThread25948 - Shutting down
+2024-11-05 17:27:12 - uvicorn.error - INFO -MainThread25948 - Waiting for application shutdown.
+2024-11-05 17:27:13 - uvicorn.error - INFO -MainThread25948 - Application shutdown complete.
+2024-11-05 17:27:13 - uvicorn.error - INFO -MainThread25948 - Finished server process [7200]
