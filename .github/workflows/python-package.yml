@@ -32,4 +32,5 @@ jobs:
       env:
         LOG_CONFIG: ./log.yaml
       run: |
+        poetry shell
         pytest tests/ -v
