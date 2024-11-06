@@ -7,8 +7,6 @@ on:                            # 触发条件，新建tag时触发
 
 jobs:
   pkg:
-    needs:
-      - build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4    # 使用checkout这个已有的action来初始化git环境
