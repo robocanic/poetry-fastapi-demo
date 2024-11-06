@@ -1,4 +1,4 @@
-name: Python package           # workflow名字
+name: Dev CI           # workflow名字
 
 on:                            # 触发条件，push或merge到dev中触发
   push:                        
@@ -7,7 +7,7 @@ on:                            # 触发条件，push或merge到dev中触发
     branches: [ "dev" ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest    # 跑在ubuntu虚拟机上
     strategy:                 # 执行策略
       fail-fast: false

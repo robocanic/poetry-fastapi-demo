@@ -5,6 +5,7 @@ description = "A web project template using poetry and fastapi."
 authors = ["robocanic <robocanic@example.com>"]
 license = "Apache 2.0"
 readme = "README.md"
+homepage = "https://github.com/robocanic/poetry-fastapi-demo"
 
 [tool.poetry.dependencies]  # 主要依赖
 python = "~3.10"

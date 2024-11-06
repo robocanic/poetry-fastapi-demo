@@ -1,0 +1,33 @@
+name: Release deploy           # workflow名字
+
+on:                            # 触发条件，新建tag时触发
+  push:
+    tags:
+      - 'v*'                   # 以v开头的tag触发
+
+jobs:
+  pkg:
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4    # 使用checkout这个已有的action来初始化git环境
+      - name: Set up Python ${{ matrix.python-version }}   # 使用setup-python来初始化python环境
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}     # 指定python版本
+      - name: Set up Poetry                 # 使用setup-poetry这个已有的action来初始化poetry
+        uses: Gr1N/setup-poetry@v9
+      - name: Extract version
+        id: extract_version
+        run: |
+          VERSION="${GITHUB_REF#refs/tags/}"  
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
+      - name: Replace version
+        run: |
+          sed -i "s/^version = \".*\"/version = \"${{ env.VERSION }}\"/" pyproject.toml
+      - name: Package & Publish         # 使用poetry下载依赖，因为是在一个单独的虚拟机/容器中，所以无需创建虚拟环境
+        run: |
+          poetry config virtualenvs.create false
+          poetry build
+          poetry publish
