@@ -24,8 +24,14 @@ jobs:
       - name: Replace version
         run: |
           sed -i "s/^version = \".*\"/version = \"${{ env.VERSION }}\"/" pyproject.toml
-      - name: Package & Publish         # 使用poetry下载依赖，因为是在一个单独的虚拟机/容器中，所以无需创建虚拟环境
+      - name: Build Package         # 使用poetry下载依赖，因为是在一个单独的虚拟机/容器中，所以无需创建虚拟环境
         run: |
           poetry config virtualenvs.create false
           poetry build
+      - name: Publish Package
+        env:
+          PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+        run: |
+          poetry config pypi-token.pypi $PYPI_API_TOKEN
           poetry publish
+          
