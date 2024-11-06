@@ -15,7 +15,7 @@ class TestUserTable:
         user = user_table.get_user_by_id(1)
         user.name = "Chris2"
         assert user_table.update_user(user) is True
-        assert user_table.get_user_by_id(1).name == "Chris"   # 故意写错
+        assert user_table.get_user_by_id(1).name == "Chris2"   # 故意写错
 
     def test_delete_user(self):
         assert user_table.delete_user(1) is True
