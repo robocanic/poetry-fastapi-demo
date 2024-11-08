@@ -1,0 +1,34 @@
+name: Dev CI           # workflow名字
+
+on:                            # 触发条件，push或merge到dev中触发
+  push:                        
+    branches: [ "dev" ]    
+  pull_request:
+    branches: [ "dev" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest    # 跑在ubuntu虚拟机上
+    strategy:                 # 执行策略
+      fail-fast: false
+      matrix:
+        python-version: ["3.10"]
+
+    steps:                    # 执行步骤
+    - uses: actions/checkout@v4    # 使用checkout这个已有的action来初始化git环境
+    - name: Set up Python ${{ matrix.python-version }}   # 使用setup-python来初始化python环境
+      uses: actions/setup-python@v3         
+      with: 
+        python-version: ${{ matrix.python-version }}     # 指定python版本
+    - name: Set up Poetry                 # 使用setup-poetry这个已有的action来初始化poetry
+      uses: Gr1N/setup-poetry@v9          
+    - name: Install dependencies         # 使用poetry下载依赖，因为是在一个单独的虚拟机/容器中，所以无需创建虚拟环境
+      run: |   
+        poetry config virtualenvs.create false
+        poetry lock
+        poetry install --all-extras
+    - name: Test with pytest            # 使用pytest执行集成测试
+      env:
+        LOG_CONFIG: ./log.yaml
+      run: |
+        pytest tests/ -v
